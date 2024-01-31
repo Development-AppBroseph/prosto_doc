@@ -27,8 +27,9 @@ class MyApp extends StatelessWidget {
         builder: (_, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+            title: 'Prosto Doc',
             home: child,
+            // theme: ThemeData(primaryColor: AppColors.textColor),
             // routes: {
             //   '/': (context) => const MainCategoriesView(),
             //   '/docs': (context) => const DocumentsView(),

@@ -14,6 +14,7 @@ Future<void> confirmDialog({
   bool isCode = false,
   bool isInn = false,
   required dynamic Function(String, {BuildContext? dialogContext}) onConfirm,
+  Widget Function(TextEditingController)? customTextField,
 }) async {
   return showDialog<void>(
     context: context,
@@ -50,13 +51,14 @@ Future<void> confirmDialog({
                 ),
               ),
               SizedBox(height: 53.h),
-              CustomTextField(
-                hint: hint,
-                isPhone: false,
-                isCode: isCode,
-                isInn: isInn,
-                textEditingController: textEditingController,
-              ),
+              customTextField?.call(textEditingController) ??
+                  CustomTextField(
+                    hint: hint,
+                    isPhone: false,
+                    isCode: isCode,
+                    isInn: isInn,
+                    textEditingController: textEditingController,
+                  ),
               // CustomButton(title: confirmBtnText, onTap: onConfirm),
               SizedBox(height: 58.h),
               CustomButton(

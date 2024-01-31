@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:prosto_doc/core/helpers/address_textfield.dart';
 import 'package:prosto_doc/core/helpers/alert_toast.dart';
 import 'package:prosto_doc/core/helpers/api_constants.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
@@ -259,6 +260,10 @@ class _ProfileViewState extends State<ProfileView> {
                             Navigator.push(
                                 context, createRoute(AddDocumentView()));
                           },
+                          customTextField: (c) => addressTextField(
+                            controller: c,
+                            hint: 'Введите ваш адрес',
+                          ),
                         );
                       } else {
                         Navigator.push(context, createRoute(AddDocumentView()));
@@ -426,9 +431,9 @@ class _ProfileViewState extends State<ProfileView> {
                     title: 'Добавить ИНН',
                     accent: false,
                   ),
-                if (authCubit.user?.addressRegistration == null)
-                  SizedBox(height: 25.h),
-                if (authCubit.user?.addressRegistration == null)
+                if (authCubit.user?.addressRegistration != null)
+                  const SizedBox(height: 25),
+                if (authCubit.user?.addressRegistration != null)
                   CustomButton(
                     onTap: () {
                       confirmDialog(
@@ -445,6 +450,8 @@ class _ProfileViewState extends State<ProfileView> {
                           });
                           Navigator.pop(dialogContext!);
                         },
+                        customTextField: (c) => addressTextField(
+                            controller: c, hint: 'г. Москва, ул Пушкина дом 9'),
                       );
                     },
                     title: 'Добавить адрес',
