@@ -172,7 +172,9 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                   CustomButton(
                     onTap: () {
                       setState(() {
-                        context.read<AuthCubit>().setInstruction('true');
+                        if (switchValue) {
+                          context.read<AuthCubit>().setInstruction('true');
+                        }
                         info = false;
                       });
                     },
