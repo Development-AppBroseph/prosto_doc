@@ -32,6 +32,7 @@ class _ClientsViewState extends State<ClientsView> {
   List<UserModel> clients = [];
 
   bool info = true;
+  bool loading = true;
 
   @override
   void initState() {
@@ -41,12 +42,14 @@ class _ClientsViewState extends State<ClientsView> {
   }
 
   getClients() async {
+    loading = true;
     var result = await context.read<MainCubit>().getClients();
     if (result != null) {
       setState(() {
         clients = result;
       });
     }
+    loading = false;
   }
 
   @override
@@ -112,6 +115,21 @@ class _ClientsViewState extends State<ClientsView> {
                         clients[index],
                       );
                     }),
+                if (clients.isEmpty && !loading)
+                  const Padding(
+                    padding: EdgeInsets.only(top: 214, left: 71, right: 71),
+                    child: Text(
+                      'У вас еще нет клиентов, добавьте\nих прямо сейчас!',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 24,
+                        height: 1.3,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(175, 175, 175, 1),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 // currentCategory(
                 //   'Виктор Степанов',
                 //   0,

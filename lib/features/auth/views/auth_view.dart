@@ -65,7 +65,7 @@ class _AuthViewState extends State<AuthView> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: SizedBox(
-        height: 322.h,
+        height: 348,
         child: Column(
           children: [
             SizedBox(height: 49.h),
@@ -73,11 +73,12 @@ class _AuthViewState extends State<AuthView> {
               padding: EdgeInsets.symmetric(horizontal: 52.w),
               child: Text(
                 'Введите ваш \n номер телефона',
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.h,
+                  fontFamily: 'Poopins',
                   color: AppColors.textColor,
-                  height: 1.2.h,
+                  height: 1.5,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -85,6 +86,7 @@ class _AuthViewState extends State<AuthView> {
             SizedBox(height: 60.h),
             CustomTextField(
               hint: '+7 900 000 00-00',
+              expand: false,
               isPhone: true,
               textEditingController: phoneController,
               onError: onError,

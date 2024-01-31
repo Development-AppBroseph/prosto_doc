@@ -65,46 +65,49 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
     return CustomScaffold(
       main: true,
       body: SizedBox(
-        // height: 152.h,
+        height: 631,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 33.h),
-            Padding(
-              padding: EdgeInsets.only(left: 19.w),
+            SizedBox(height: 33),
+            Center(
               child: Text(
                 'Категории',
-                style: GoogleFonts.poppins(
+                style: TextStyle(
+                  fontFamily: 'Poopins',
                   fontWeight: FontWeight.w700,
                   fontSize: 24.h,
                   color: AppColors.textColor,
                 ),
               ),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 30),
             CustomTextField(
               hint: 'Поиск документов...',
               isPhone: false,
+              expand: false,
               textEditingController: searchController,
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 30),
             if (searchedCategories.isEmpty && searching)
               Column(
                 children: [
-                  SizedBox(height: 20.h),
+                  const SizedBox(height: 85),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 49.w),
                     child: Text(
                       'Мы не нашли не одной категории по вашему запросу',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
+                      style: TextStyle(
+                        fontFamily: 'Poopins',
                         fontSize: 24.h,
                         color: AppColors.textColor,
+                        height: 1.5,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
-                  SizedBox(height: 33.h),
+                  SizedBox(height: 33),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -133,12 +136,11 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
                       )
                     ],
                   ),
-                  SizedBox(height: 34.h),
+                  SizedBox(height: 34),
                 ],
               )
             else
-              SizedBox(
-                height: 423.h,
+              Expanded(
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,

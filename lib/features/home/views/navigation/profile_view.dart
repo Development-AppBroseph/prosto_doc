@@ -152,7 +152,7 @@ class _ProfileViewState extends State<ProfileView> {
                         Navigator.push(context, createRoute(EditProfileView()));
                       },
                       child: Align(
-                        alignment: Alignment.centerRight,
+                        alignment: Alignment.topRight,
                         child: Container(
                           color: Colors.transparent,
                           margin: EdgeInsets.only(top: 102.h, right: 104.5.w),

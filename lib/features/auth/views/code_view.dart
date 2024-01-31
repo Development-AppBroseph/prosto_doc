@@ -93,39 +93,43 @@ class _CodeViewState extends State<CodeView> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: SizedBox(
-        height: 322.h,
+        height: 348,
         child: Column(
           children: [
-            SizedBox(height: 49.h),
+            const SizedBox(height: 49),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 52.w),
               child: Text(
-                'Введите код,который мы отправили по СМС',
-                style: GoogleFonts.poppins(
+                'Введите код,\nкоторый мы\nотправили по СМС',
+                style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontSize: 20.h,
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
                   color: AppColors.textColor,
-                  height: 1.2.h,
+                  height: 1.5,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 60.h),
+            const SizedBox(height: 60),
             CustomTextField(
               hint: '1234',
               isPhone: false,
+              expand: false,
               isCode: true,
               textEditingController: codeController,
               onError: onError,
             ),
-            SizedBox(height: 25.h),
+            const SizedBox(height: 25),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 52.w),
               child: Text(
                 'СМС код не пришёл,\n позвоните мне',
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 14.h,
+                  fontFamily: 'Poppins',
+                  height: 1.3,
                   color: AppColors.textColor,
                 ),
                 textAlign: TextAlign.center,

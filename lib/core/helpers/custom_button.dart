@@ -24,10 +24,10 @@ class CustomButton extends StatelessWidget {
         onTap();
       },
       child: Container(
-        height: 50.h,
-        width: 250.w,
+        height: 50,
+        width: 250,
         margin: EdgeInsets.only(
-            left: 70.w, right: 70.w, bottom: title == 'Даллее' ? 71.h : 0),
+            left: 70, right: 70, bottom: title == 'Даллее' ? 71 : 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(60.r),
           color: color ?? (accent ? AppColors.textColor : AppColors.whiteColor),
@@ -43,7 +43,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           title,
           style: GoogleFonts.poppins(
-            fontSize: 18.h,
+            fontSize: 18,
             fontWeight: FontWeight.w600,
             color: accent ? AppColors.whiteColor : AppColors.greyColor,
           ),

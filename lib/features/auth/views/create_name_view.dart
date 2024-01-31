@@ -44,58 +44,71 @@ class _CreateNameViewState extends State<CreateNameView> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      // onPressDone: () {
-      //   Navigator.push(context, createRoute(const HelpView()));
-      // },
+      onPressDone: () {
+        if (nameController.text.isEmpty) {
+          setState(() {
+            onError = true;
+          });
+        } else {
+          context.read<AuthCubit>().setName(nameController.text);
+          context.read<AuthCubit>().updateUser();
+          Navigator.push(context, createRoute(const HelpView()));
+          setState(() {
+            onError = false;
+          });
+        }
+      },
       body: SizedBox(
-        // height: 242.h,
+        height: 310,
         child: Column(
           children: [
-            SizedBox(height: 30.h),
+            SizedBox(height: 30),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 52.w),
               child: Text(
-                'Давайте знакомиться! \n  Как Вас зовут?',
-                style: GoogleFonts.poppins(
+                'Давайте знакомиться! \n\n Как Вас зовут?',
+                style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.h,
+                  fontFamily: 'Poopins',
                   color: AppColors.textColor,
                   height: 1.2.h,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 60),
             CustomTextField(
               hint: 'Введите ваше имя',
+              expand: false,
               isPhone: false,
               textEditingController: nameController,
               isName: true,
               onError: onError,
             ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.h, top: 20.h),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: CustomButton(
-                  onTap: () {
-                    if (nameController.text.isEmpty) {
-                      setState(() {
-                        onError = true;
-                      });
-                    } else {
-                      context.read<AuthCubit>().setName(nameController.text);
-                      context.read<AuthCubit>().updateUser();
-                      Navigator.push(context, createRoute(const HelpView()));
-                      setState(() {
-                        onError = false;
-                      });
-                    }
-                  },
-                  title: 'Далее',
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.only(bottom: 20.h, top: 20.h),
+            //   child: Align(
+            //     alignment: Alignment.bottomCenter,
+            //     child: CustomButton(
+            //       onTap: () {
+            //         if (nameController.text.isEmpty) {
+            //           setState(() {
+            //             onError = true;
+            //           });
+            //         } else {
+            //           context.read<AuthCubit>().setName(nameController.text);
+            //           context.read<AuthCubit>().updateUser();
+            //           Navigator.push(context, createRoute(const HelpView()));
+            //           setState(() {
+            //             onError = false;
+            //           });
+            //         }
+            //       },
+            //       title: 'Далее',
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

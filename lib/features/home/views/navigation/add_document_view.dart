@@ -412,6 +412,7 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                   SizedBox(height: 40.h),
                   GestureDetector(
                     onTap: () async {
+                      nameFocus.unfocus();
                       FilePickerResult? result =
                           await FilePicker.platform.pickFiles();
 
@@ -469,6 +470,7 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                   CustomButton(
                     onTap: () async {
                       info = false;
+                      nameFocus.unfocus();
                       if (!info) {
                         if (currentIndex != null &&
                             avaibilityController.text.isNotEmpty &&
@@ -484,14 +486,18 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                                       nameController.text,
                                     );
                             if (result != null) {
+                              nameFocus.unfocus();
                               Navigator.pop(context);
                             } else {
+                              nameFocus.unfocus();
                               showAlertToast('Ошибка сервера');
                             }
                           } else {
+                            nameFocus.unfocus();
                             showAlertToast('Необходимо выбрать документ Word');
                           }
                         } else {
+                          nameFocus.unfocus();
                           showAlertToast('Проверьте заполнение всех полей');
                         }
                         // Navigator.pop(context);

@@ -15,6 +15,7 @@ class CustomTextField extends StatefulWidget {
   bool isInn;
   bool isName;
   bool enabled;
+  bool expand;
   Function()? onTap;
   FocusNode? focusNode;
   final TextEditingController textEditingController;
@@ -25,6 +26,7 @@ class CustomTextField extends StatefulWidget {
     required this.isPhone,
     this.isInn = false,
     this.onTap,
+    this.expand = true,
     this.isName = false,
     this.enabled = true,
     this.focusNode,
@@ -53,7 +55,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         }
       },
       child: Container(
-        height: 55.h,
+        height: widget.expand ? 55.h : 45,
         width: double.infinity,
         margin: EdgeInsets.symmetric(horizontal: 19.w),
         padding: EdgeInsets.symmetric(horizontal: 22.w),
@@ -112,6 +114,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             if (widget.isName) NameInputFormatter(),
             if (widget.isCode && !widget.isInn)
               LengthLimitingTextInputFormatter(4),
+            if (widget.isInn) LengthLimitingTextInputFormatter(12),
           ],
         ),
       ),

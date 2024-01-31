@@ -68,11 +68,11 @@ class _SubCategoriesViewState extends State<SubCategoriesView> {
       backgroundColor: HexColor(widget.category.color!),
       main: true,
       body: SizedBox(
-        // height: 152.h,
+        height: 631,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 33.h),
+            SizedBox(height: 33),
             Padding(
               padding: EdgeInsets.only(left: 19.w),
               child: Row(
@@ -108,17 +108,18 @@ class _SubCategoriesViewState extends State<SubCategoriesView> {
                 ],
               ),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 30),
             CustomTextField(
               hint: 'Поиск документов...',
               isPhone: false,
+              expand: false,
               textEditingController: searchController,
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 30),
             if (searchedCategories.isEmpty && searching)
               Column(
                 children: [
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 85),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 49.w),
                     child: Text(
@@ -131,7 +132,7 @@ class _SubCategoriesViewState extends State<SubCategoriesView> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 33.h),
+                  SizedBox(height: 33),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -164,8 +165,7 @@ class _SubCategoriesViewState extends State<SubCategoriesView> {
                 ],
               )
             else
-              SizedBox(
-                height: 423.h,
+              Expanded(
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,

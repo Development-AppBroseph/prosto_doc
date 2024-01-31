@@ -52,30 +52,27 @@ class _HelpViewState extends State<HelpView> {
       },
       body: SizedBox(
         height: 152.h,
-        child: Column(
-          children: [
-            SizedBox(height: 49.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 52.w),
-              // child: Text(
-              //   'Чем мы можем\n Вам помочь?',
-              //   style: GoogleFonts.poppins(
-              //     fontWeight: FontWeight.w700,
-              //     fontSize: 20.h,
-              //     color: AppColors.textColor,
-              //     height: 1.2.h,
-              //   ),
-              //   textAlign: TextAlign.center,
-              // ),
-              child:
-                  SvgPicture.asset('assets/icons/Чем мы можем вам помочь_.svg'),
-            ),
-          ],
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 52.w),
+            // child: Text(
+            //   'Чем мы можем\n Вам помочь?',
+            //   style: GoogleFonts.poppins(
+            //     fontWeight: FontWeight.w700,
+            //     fontSize: 20.h,
+            //     color: AppColors.textColor,
+            //     height: 1.2.h,
+            //   ),
+            //   textAlign: TextAlign.center,
+            // ),
+            child:
+                SvgPicture.asset('assets/icons/Чем мы можем вам помочь_.svg'),
+          ),
         ),
       ),
       secondBody: Column(
         children: [
-          SizedBox(height: 279.h),
+          const SizedBox(height: 279),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 21.w),
             child: Row(
@@ -112,14 +109,15 @@ class _HelpViewState extends State<HelpView> {
                           color: selectedRole == 1
                               ? AppColors.whiteColor
                               : AppColors.textColor,
-                          width: 44.w,
-                          height: 55.h,
+                          width: 44,
+                          height: 55,
                         ),
-                        SizedBox(height: 15.h),
+                        SizedBox(height: 15),
                         Text(
                           'Мне нужен \n документ',
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
+                          style: TextStyle(
+                            fontFamily: 'Poopins',
                             fontSize: 14.h,
                             color: selectedRole == 1
                                 ? AppColors.whiteColor
@@ -166,14 +164,15 @@ class _HelpViewState extends State<HelpView> {
                           color: selectedRole == 2
                               ? AppColors.whiteColor
                               : AppColors.textColor,
-                          width: 85.w,
-                          height: 66.h,
+                          width: 85,
+                          height: 66,
                         ),
                         SizedBox(height: 15.h),
                         Text(
                           'Я специалист',
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
+                          style: TextStyle(
+                            fontFamily: 'Poopins',
                             fontSize: 14.h,
                             color: selectedRole == 2
                                 ? AppColors.whiteColor

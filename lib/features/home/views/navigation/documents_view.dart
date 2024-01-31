@@ -102,13 +102,15 @@ class _DocumentsViewState extends State<DocumentsView> {
       small: true,
       main: true,
       isScroll: true,
-      body: SizedBox(
-        height: 84.h,
-        child: Center(
-          child: SizedBox(
-            child: SvgPicture.asset(
-              'assets/icons/Мои документы.svg',
-              height: 24.h,
+      body: Center(
+        child: SizedBox(
+          height: 84.h,
+          child: Center(
+            child: SizedBox(
+              child: SvgPicture.asset(
+                'assets/icons/Мои документы.svg',
+                height: 24.h,
+              ),
             ),
           ),
         ),
