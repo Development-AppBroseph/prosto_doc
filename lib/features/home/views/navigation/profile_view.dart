@@ -431,9 +431,9 @@ class _ProfileViewState extends State<ProfileView> {
                     title: 'Добавить ИНН',
                     accent: false,
                   ),
-                if (authCubit.user?.addressRegistration != null)
+                if (authCubit.user?.addressRegistration == null)
                   const SizedBox(height: 25),
-                if (authCubit.user?.addressRegistration != null)
+                if (authCubit.user?.addressRegistration == null)
                   CustomButton(
                     onTap: () {
                       confirmDialog(
