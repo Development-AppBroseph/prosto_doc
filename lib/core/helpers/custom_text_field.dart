@@ -115,6 +115,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             if (widget.isCode && !widget.isInn)
               LengthLimitingTextInputFormatter(4),
             if (widget.isInn) LengthLimitingTextInputFormatter(12),
+            if (widget.isInn) FilteringTextInputFormatter.digitsOnly,
           ],
         ),
       ),

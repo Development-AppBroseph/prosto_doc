@@ -401,7 +401,7 @@ class _ProfileViewState extends State<ProfileView> {
                     title: 'Добавить email',
                     accent: false,
                   ),
-                if (authCubit.user?.inn == null) SizedBox(height: 25.h),
+                if (authCubit.user?.inn == null) const SizedBox(height: 25),
                 if (authCubit.user?.inn == null)
                   CustomButton(
                     onTap: () {
