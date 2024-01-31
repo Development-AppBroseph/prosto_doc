@@ -1,3 +1,7 @@
+### CUSTOM
+.fvm
+.vscode
+
 # Miscellaneous
 *.class
 *.log

@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                               Material(
                                 color: Colors.white,
                                 child: Text(
-                                  'Кактегории',
+                                  'Категории',
                                   style: GoogleFonts.poppins(
                                     fontSize: 12.h,
                                     color: currentIndex == 0
