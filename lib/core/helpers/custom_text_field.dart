@@ -19,6 +19,7 @@ class CustomTextField extends StatefulWidget {
   Function()? onTap;
   FocusNode? focusNode;
   final TextEditingController textEditingController;
+  String? Function(String?)? validator;
 
   CustomTextField({
     super.key,
@@ -34,6 +35,7 @@ class CustomTextField extends StatefulWidget {
     required this.textEditingController,
     this.isCode = false,
     this.onError = false,
+    this.validator,
   });
 
   @override
@@ -86,7 +88,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(60.r),
         ),
         alignment: Alignment.centerLeft,
-        child: TextField(
+        child: TextFormField(
           enabled: widget.enabled == false ? false : !widget.isDate,
           controller: widget.textEditingController,
           style: GoogleFonts.poppins(
@@ -117,6 +119,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             if (widget.isInn) LengthLimitingTextInputFormatter(12),
             if (widget.isInn) FilteringTextInputFormatter.digitsOnly,
           ],
+          validator: widget.validator,
         ),
       ),
     );
