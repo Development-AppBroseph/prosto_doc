@@ -21,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   FocusNode? focusNode;
   final TextEditingController textEditingController;
   String? Function(String?)? validator;
+  double? padding;
 
   CustomTextField({
     super.key,
@@ -37,6 +38,7 @@ class CustomTextField extends StatefulWidget {
     this.isCode = false,
     this.onError = false,
     this.validator,
+    this.padding,
   });
 
   @override
@@ -61,7 +63,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         // height: widget.expand ? 55.h : 45,
         width: double.infinity,
         // margin: EdgeInsets.symmetric(horizontal: 19.w),
-        padding: const EdgeInsets.symmetric(horizontal: 22),
+        padding: EdgeInsets.symmetric(horizontal: widget.padding ?? 22),
         // decoration: BoxDecoration(
         //   boxShadow: [
         //     BoxShadow(
