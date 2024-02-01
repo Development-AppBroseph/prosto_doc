@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 // 1994-02-01
@@ -8,6 +7,7 @@ part 'user_model.g.dart';
 @JsonSerializable()
 class UserModel {
   final int id;
+  @JsonKey(name: "active_role")
   final String? activeRole;
   @JsonKey(name: "address_registration")
   final String? addressRegistration;
@@ -18,12 +18,14 @@ class UserModel {
   final DateTime? dateOfBirth;
   final String? email;
   final String? inn;
+  @JsonKey(name: "logo_in_document")
   final bool? logoInDocument;
   final String? name;
   final String? patronymic;
   @JsonKey(name: "phone_number")
   final String? phoneNumber;
   final String? surname;
+  @JsonKey(name: "surname_declines")
   final bool? surnameDeclines;
 
   UserModel({

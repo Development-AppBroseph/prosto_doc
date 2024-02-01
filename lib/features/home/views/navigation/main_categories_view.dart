@@ -155,7 +155,7 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
                     Categories currentModel = !searching
                         ? categories[index]
                         : searchedCategories[index];
-                    print(currentModel.color);
+                    // print(currentModel.color);
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(

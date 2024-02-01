@@ -36,13 +36,15 @@ class _HelpViewState extends State<HelpView> {
     return CustomScaffold(
       onPressDone: () async {
         if (selectedRole != 0) {
-          context
-              .read<AuthCubit>()
-              .setUserType(selectedRole == 1 ? 'is_client' : 'is_lawyer');
-          context.read<AuthCubit>().updateUser();
+          final auth = context.read<AuthCubit>();
+
+          auth.setUserType(selectedRole == 1 ? 'is_client' : 'is_lawyer');
+          // print('new user ${auth.user?.toJson()}');
+          auth.updateUser();
           // await context
           //     .read<AuthCubit>()
           //     .setToken(selectedRole == 1 ? 'is_client' : 'is_laywer');
+
           Navigator.pushAndRemoveUntil(
             context,
             createRoute(CurrentScreen()),
@@ -80,6 +82,7 @@ class _HelpViewState extends State<HelpView> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
+                      print('role 1');
                       selectedRole = 1;
                     });
                   },
@@ -135,6 +138,7 @@ class _HelpViewState extends State<HelpView> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
+                      print('role 2');
                       selectedRole = 2;
                     });
                   },

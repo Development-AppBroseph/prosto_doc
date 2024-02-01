@@ -119,6 +119,7 @@ class _CurrentDocumentViewState extends State<CurrentDocumentView> {
   @override
   Widget build(BuildContext context) {
     print(docUrl + widget.item.pdfFileLocation!);
+    GlobalKey globalKey = GlobalKey();
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       body: Column(
@@ -165,10 +166,12 @@ class _CurrentDocumentViewState extends State<CurrentDocumentView> {
           SizedBox(height: 20.h),
           Expanded(
             child: Stack(
+              key: globalKey,
               children: [
                 // Image.asset('assets/images/document.png'),
                 SizedBox(
-                  height: 670.h,
+                  // height: 670.h,
+                  height: double.infinity,
                   child: const PDF(
                     swipeHorizontal: true,
                   ).fromUrl(
@@ -190,14 +193,29 @@ class _CurrentDocumentViewState extends State<CurrentDocumentView> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          deleteDialog(
+                            context: context,
+                            title:
+                                'Вы действительно\nхотите удалить\nдокумент?',
+                            onConfirm: () async {
+                              bool? result = await context
+                                  .read<MainCubit>()
+                                  .deleteDocument(widget.item.id);
+                              if (result != null) {
+                                await context
+                                    .read<MainCubit>()
+                                    .getMyDocuments();
+                                Navigator.pop(context);
+                              }
+                              // Navigator.pop(context);
+                            },
+                          );
                         },
                         child: Container(
                           height: 29.h,
                           // width: 29.w,
                           color: Colors.transparent,
-                          // child:
-                          //     SvgPicture.asset('assets/icons/trash.svg'),
+                          child: SvgPicture.asset('assets/icons/trash.svg'),
                         ),
                       ),
                       GestureDetector(

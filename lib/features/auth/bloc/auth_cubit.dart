@@ -91,7 +91,8 @@ class AuthCubit extends Cubit<AuthMainState> {
         return null;
       }
     } on DioException catch (e) {
-      throw "${e.message}";
+      print(e.response?.data);
+      throw "Bad sendCodePhone";
     }
   }
 
@@ -139,7 +140,9 @@ class AuthCubit extends Cubit<AuthMainState> {
   }
 
   Future<UserModel?> updateUser() async {
-    print(user?.avatarPath);
+    print('updateUser()');
+    print('Local user:');
+    print(user?.toJson());
     try {
       Response response = await dio.put(
         // options: Options(contentType: Headers.formUrlEncodedContentType),
@@ -150,12 +153,13 @@ class AuthCubit extends Cubit<AuthMainState> {
       if (response.statusCode == 200) {
         emit(GetUserSuccess());
         user = UserModel.fromJson(response.data);
-        return UserModel.fromJson(response.data);
+        return user;
       } else {
         return null;
       }
     } on DioException catch (e) {
-      throw "${e.message}";
+      print(e.response?.data);
+      throw "Bad updateUser";
     }
   }
 
@@ -248,7 +252,7 @@ class AuthCubit extends Cubit<AuthMainState> {
     print(user?.name);
   }
 
-  setUserType(String type) {
+  void setUserType(String type) {
     user = user?.copyWith(activeRole: type);
     print(user?.activeRole);
   }
@@ -281,15 +285,21 @@ class AuthCubit extends Cubit<AuthMainState> {
 
   deleteAccount() async {
     try {
+      print('Account delete request');
       Response response = await dio.delete(
         '$baseUrl/api/v1/users/',
       );
 
       if (response.statusCode == 200) {
+        print('Account deleted');
       } else {
+        print(response?.statusCode);
+        print(response?.data);
         return null;
       }
     } on DioException catch (e) {
+      print(e.response?.statusCode);
+      print(e.response?.data);
       return null;
     }
     logout();

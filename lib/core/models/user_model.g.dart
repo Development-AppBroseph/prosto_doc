@@ -8,36 +8,36 @@ part of 'user_model.dart';
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       id: json['id'] as int,
-      activeRole: json['activeRole'] as String?,
+      activeRole: json['active_role'] as String?,
       addressRegistration: json['address_registration'] as String?,
       avatarPath: json['avatar_path'] as String?,
       dateOfBirth: _$JsonConverterFromJson<String, DateTime>(
           json['date_of_birth'], const DateTimeConverter().fromJson),
       email: json['email'] as String?,
       inn: json['inn'] as String?,
-      logoInDocument: json['logoInDocument'] as bool?,
+      logoInDocument: json['logo_in_document'] as bool?,
       name: json['name'] as String?,
       patronymic: json['patronymic'] as String?,
       phoneNumber: json['phone_number'] as String?,
       surname: json['surname'] as String?,
-      surnameDeclines: json['surnameDeclines'] as bool?,
+      surnameDeclines: json['surname_declines'] as bool?,
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'id': instance.id,
-      'activeRole': instance.activeRole,
+      'active_role': instance.activeRole,
       'address_registration': instance.addressRegistration,
       'avatar_path': instance.avatarPath,
       'date_of_birth': _$JsonConverterToJson<String, DateTime>(
           instance.dateOfBirth, const DateTimeConverter().toJson),
       'email': instance.email,
       'inn': instance.inn,
-      'logoInDocument': instance.logoInDocument,
+      'logo_in_document': instance.logoInDocument,
       'name': instance.name,
       'patronymic': instance.patronymic,
       'phone_number': instance.phoneNumber,
       'surname': instance.surname,
-      'surnameDeclines': instance.surnameDeclines,
+      'surname_declines': instance.surnameDeclines,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

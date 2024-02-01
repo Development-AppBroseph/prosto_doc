@@ -137,7 +137,8 @@ class MainCubit extends Cubit<MainState> {
         return null;
       }
     } on DioException catch (e) {
-      throw "${e.message}";
+      print(e.response?.data);
+      throw "$e";
     }
   }
 
@@ -159,7 +160,8 @@ class MainCubit extends Cubit<MainState> {
         return null;
       }
     } on DioException catch (e) {
-      throw "${e.message}";
+      print(e.response?.data);
+      throw "Bad getClientDocuments";
     }
   }
 
@@ -217,7 +219,8 @@ class MainCubit extends Cubit<MainState> {
         return null;
       }
     } on DioException catch (e) {
-      throw "${e.message}";
+      print(e.response?.data);
+      throw "Bad updateClient";
     }
   }
 
@@ -264,7 +267,8 @@ class MainCubit extends Cubit<MainState> {
         return null;
       }
     } on DioException catch (e) {
-      throw "${e.message}";
+      print(e.response?.data);
+      throw "Bad download doc";
     }
   }
 
