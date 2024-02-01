@@ -81,7 +81,7 @@ class CustomScaffoldCategories extends StatelessWidget {
                     right: 21.w,
                     bottom: kBottomNavigationBarHeight + 40,
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 21),
+                  // padding: EdgeInsets.symmetric(horizontal: 21),
                   // width: 348.w,
                   decoration: BoxDecoration(
                     color: Colors.white,

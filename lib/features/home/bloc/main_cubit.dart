@@ -48,8 +48,10 @@ class MainCubit extends Cubit<MainState> {
       });
 
       if (response.statusCode == 200) {
-        return List<Categories>.from(
+        final res = List<Categories>.from(
             response.data.map((x) => Categories.fromJson(x)));
+        print(res.map((e) => e.name));
+        return res;
       } else {
         return null;
       }
@@ -87,8 +89,10 @@ class MainCubit extends Cubit<MainState> {
         });
 
     if (response.statusCode == 200) {
-      return List<Categories>.from(
+      final res = List<Categories>.from(
           response.data.map((x) => Categories.fromJson(x)));
+      print(res.map((e) => e.name));
+      return res;
     } else {
       return null;
     }
