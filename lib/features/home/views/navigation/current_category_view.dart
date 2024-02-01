@@ -126,7 +126,7 @@ class _CurrentCategoryViewState extends State<CurrentCategoryView> {
                   CustomTextField(
                     hint: 'Поиск документов...',
                     isPhone: false,
-                    expand: false,
+                    // expand: false,
                     textEditingController: searchController,
                   ),
                   SizedBox(height: 30),

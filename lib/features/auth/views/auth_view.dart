@@ -86,7 +86,7 @@ class _AuthViewState extends State<AuthView> {
             SizedBox(height: 60.h),
             CustomTextField(
               hint: '+7 900 000 00-00',
-              expand: false,
+              // expand: false,
               isPhone: true,
               textEditingController: phoneController,
               onError: onError,

@@ -112,7 +112,7 @@ class _SubCategoriesViewState extends State<SubCategoriesView> {
             CustomTextField(
               hint: 'Поиск документов...',
               isPhone: false,
-              expand: false,
+              // expand: false,
               textEditingController: searchController,
             ),
             SizedBox(height: 30),

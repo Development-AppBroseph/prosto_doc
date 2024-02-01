@@ -80,7 +80,7 @@ class _CreateNameViewState extends State<CreateNameView> {
             SizedBox(height: 60),
             CustomTextField(
               hint: 'Введите ваше имя',
-              expand: false,
+              // expand: false,
               isPhone: false,
               textEditingController: nameController,
               isName: true,

@@ -85,7 +85,7 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
             CustomTextField(
               hint: 'Поиск документов...',
               isPhone: false,
-              expand: false,
+              // expand: false,
               textEditingController: searchController,
             ),
             SizedBox(height: 30),

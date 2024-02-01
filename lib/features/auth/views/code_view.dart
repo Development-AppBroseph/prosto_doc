@@ -115,7 +115,7 @@ class _CodeViewState extends State<CodeView> {
             CustomTextField(
               hint: '1234',
               isPhone: false,
-              expand: false,
+              // expand: false,
               isCode: true,
               textEditingController: codeController,
               onError: onError,

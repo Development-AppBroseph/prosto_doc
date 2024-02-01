@@ -202,7 +202,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 const SizedBox(height: 15),
                                 Text(
                                   authCubit.user?.phoneNumber ??
-                                      'Телефон не указано',
+                                      'Телефон не указан',
                                   style: GoogleFonts.montserrat(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 15.h,

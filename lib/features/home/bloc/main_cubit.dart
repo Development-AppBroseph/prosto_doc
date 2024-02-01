@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -181,19 +182,23 @@ class MainCubit extends Cubit<MainState> {
   }
 
   Future<UserModel?> addClient(UserModel client) async {
+    final data = jsonEncode(client.toJson());
+    // print(data);
     try {
       Response response = await dio.post(
         '$baseUrl/api/v1/lawyer-clients/',
         // options: Options(contentType: Headers.formUrlEncodedContentType),
-        data: client.toJson(),
+        data: data,
       );
 
       if (response.statusCode == 200) {
         return UserModel.fromJson(response.data);
       } else {
+        print(response.data);
         return null;
       }
     } on DioException catch (e) {
+      print(e.response?.data);
       throw "${e.message}";
     }
   }

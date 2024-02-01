@@ -15,12 +15,11 @@ import 'package:prosto_doc/core/helpers/api_constants.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
 import 'package:prosto_doc/core/helpers/custom_button.dart';
 import 'package:prosto_doc/core/helpers/custom_text_field.dart';
-import 'package:prosto_doc/core/helpers/images.dart';
 import 'package:prosto_doc/core/helpers/validators.dart';
 import 'package:prosto_doc/features/auth/bloc/auth_cubit.dart';
 
 class EditProfileView extends StatefulWidget {
-  EditProfileView({super.key});
+  const EditProfileView({super.key});
 
   @override
   State<EditProfileView> createState() => _EditProfileViewState();
@@ -330,7 +329,7 @@ class _EditProfileViewState extends State<EditProfileView> {
               if (!isUser)
                 Column(
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     CustomTextField(
                       hint: 'prostodoc@doc.ru',
                       isPhone: false,
@@ -341,7 +340,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                       validator: nonEmpty,
                       textEditingController: emailController,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     CustomTextField(
                       hint: 'NNNNXXXXXXCC',
                       isPhone: false,
@@ -352,18 +351,18 @@ class _EditProfileViewState extends State<EditProfileView> {
                       validator: nonEmpty,
                       textEditingController: innController,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 22),
                       child: AddressTextField(
                         addressController,
                         'г. Москва, ул Пушкина дом 9',
-                        nonEmpty,
+                        validator: nonEmpty,
                       ),
                     ),
                   ],
                 ),
-              SizedBox(height: 58),
+              const SizedBox(height: 58),
               CustomButton(
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {

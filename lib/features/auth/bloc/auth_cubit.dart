@@ -125,9 +125,10 @@ class AuthCubit extends Cubit<AuthMainState> {
       Response response = await dio.get('$baseUrl/api/v1/auth/me');
 
       if (response.statusCode == 200) {
+        print(response.data);
         user = UserModel.fromJson(response.data);
         emit(GetUserSuccess());
-        return UserModel.fromJson(response.data);
+        return user;
       } else {
         return null;
       }
