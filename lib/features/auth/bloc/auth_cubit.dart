@@ -158,8 +158,10 @@ class AuthCubit extends Cubit<AuthMainState> {
         return null;
       }
     } on DioException catch (e) {
-      print(e.response?.data);
-      throw "Bad updateUser";
+      // print(e.response?.data);
+      // return null;
+      print('Bad updateUser');
+      throw "${e.response?.data}";
     }
   }
 
@@ -218,6 +220,10 @@ class AuthCubit extends Cubit<AuthMainState> {
 
   setLogoInDocument(bool logoInDocument) {
     user = user?.copyWith(logoInDocument: logoInDocument);
+  }
+
+  setLogo(String logo) {
+    user = user?.copyWith(logo: logo);
   }
 
   setPhone(String phone) {

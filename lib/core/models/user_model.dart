@@ -27,6 +27,7 @@ class UserModel {
   final String? surname;
   @JsonKey(name: "surname_declines")
   final bool? surnameDeclines;
+  final String? logo;
 
   UserModel({
     required this.id,
@@ -42,6 +43,7 @@ class UserModel {
     required this.phoneNumber,
     required this.surname,
     required this.surnameDeclines,
+    required this.logo,
   });
 
   // factory UserModel.fromRawJson(String str) =>
@@ -63,6 +65,7 @@ class UserModel {
     String? phoneNumber,
     String? surname,
     bool? surnameDeclines,
+    String? logo,
   }) =>
       UserModel(
         id: id ?? this.id,
@@ -78,6 +81,7 @@ class UserModel {
         phoneNumber: phoneNumber ?? this.phoneNumber,
         surname: surname ?? this.surname,
         surnameDeclines: surnameDeclines ?? this.surnameDeclines,
+        logo: logo ?? this.logo,
       );
 
   // factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -114,6 +118,10 @@ class UserModel {
   //       "surname": surname,
   //       "surname_declines": surnameDeclines,
   //     };
+
+  bool isLawyer() {
+    return activeRole == 'is_lawyer';
+  }
 
   /// Connect the generated [_$PersonFromJson] function to the `fromJson`
   /// factory.

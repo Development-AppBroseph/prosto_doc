@@ -13,13 +13,16 @@ import 'package:prosto_doc/core/helpers/api_constants.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
 import 'package:prosto_doc/core/helpers/custom_button.dart';
 import 'package:prosto_doc/core/helpers/custom_page_route.dart';
+import 'package:prosto_doc/core/helpers/custom_secondary_button.dart';
 import 'package:prosto_doc/core/helpers/dialogs.dart';
 import 'package:prosto_doc/core/models/category_model_old.dart';
 import 'package:prosto_doc/core/models/email_code.dart';
+import 'package:prosto_doc/core/models/user_model.dart';
 import 'package:prosto_doc/core/models/verifed_email.dart';
 import 'package:prosto_doc/features/auth/bloc/auth_cubit.dart';
 
 import 'package:prosto_doc/features/home/views/navigation/add_document_view.dart';
+import 'package:prosto_doc/features/home/views/navigation/add_logo_view/add_logo_view.dart';
 import 'package:prosto_doc/features/home/views/navigation/clients_view.dart';
 import 'package:prosto_doc/features/home/views/navigation/edit_profile_view.dart';
 
@@ -163,7 +166,7 @@ class _ProfileViewState extends State<ProfileView> {
                                   child: GestureDetector(
                                     onTap: () {
                                       Navigator.push(context,
-                                          createRoute(EditProfileView()));
+                                          createRoute(const EditProfileView()));
                                     },
                                     child: Align(
                                       alignment: Alignment.topLeft,
@@ -185,8 +188,8 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context, createRoute(EditProfileView()));
+                              Navigator.push(context,
+                                  createRoute(const EditProfileView()));
                             },
                             child: Column(
                               children: [
@@ -222,7 +225,7 @@ class _ProfileViewState extends State<ProfileView> {
                 // SizedBox(height: 61.h),
                 // CustomButton(onTap: () {}, title: 'Чат с поддержкой'),
                 // if (!isUser) SizedBox(height: 20.h),
-                if (!isUser) SizedBox(height: 28.72),
+                if (!isUser) const SizedBox(height: 28.72),
                 if (!isUser)
                   CustomButton(
                     onTap: () async {
@@ -272,7 +275,7 @@ class _ProfileViewState extends State<ProfileView> {
                     },
                     title: 'Добавить документ',
                   ),
-                if (!isUser) SizedBox(height: 20),
+                if (!isUser) const SizedBox(height: 20),
                 if (!isUser)
                   CustomButton(
                     onTap: () {
@@ -280,7 +283,10 @@ class _ProfileViewState extends State<ProfileView> {
                     },
                     title: 'Мои клиенты',
                   ),
-                if (!isUser) SizedBox(height: 50),
+                LogoWrapper(
+                  userModel: authCubit.user,
+                ),
+                if (!isUser) const SizedBox(height: 50),
                 if (!isUser)
                   Container(
                     width: double.infinity,
@@ -308,7 +314,7 @@ class _ProfileViewState extends State<ProfileView> {
                       ],
                     ),
                   ),
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 Container(
                   height: 35.h,
                   width: double.infinity,
@@ -338,7 +344,7 @@ class _ProfileViewState extends State<ProfileView> {
                     ],
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 if (authCubit.user?.email != null ||
                     authCubit.user?.inn != null ||
                     authCubit.user?.addressRegistration != null)
@@ -458,7 +464,7 @@ class _ProfileViewState extends State<ProfileView> {
                     title: 'Добавить адрес',
                     accent: false,
                   ),
-                SizedBox(height: 66),
+                const SizedBox(height: 66),
                 GestureDetector(
                   onTap: () {
                     // Navigator.pushAndRemoveUntil(
@@ -601,7 +607,7 @@ class UserAvatar extends StatelessWidget {
         );
       }
     } else {
-      return svg_provider.Svg(
+      return const svg_provider.Svg(
         'assets/icons/person.svg',
       );
       // Sbg
@@ -611,6 +617,40 @@ class UserAvatar extends StatelessWidget {
       //   height: 135.h,
       //   fit: BoxFit.cover,
       // );
+    }
+  }
+}
+
+class LogoWrapper extends StatelessWidget {
+  const LogoWrapper({required this.userModel, super.key});
+
+  final UserModel? userModel;
+
+  @override
+  Widget build(BuildContext context) {
+    if (userModel?.isLawyer() ?? false) {
+      final logoExists = userModel?.logo != null;
+      return Column(
+        children: [
+          const SizedBox(height: 20),
+          // userModel!.
+          CustomSecondaryButton(
+            onTap: () {
+              Navigator.push(
+                context,
+                createRoute(
+                  AddLogoView(
+                    logoExists: logoExists,
+                  ),
+                ),
+              );
+            },
+            title: logoExists ? 'Редактировать логотип' : 'Добавить логотип',
+          ),
+        ],
+      );
+    } else {
+      return const SizedBox();
     }
   }
 }

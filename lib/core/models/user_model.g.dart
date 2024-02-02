@@ -21,6 +21,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       phoneNumber: json['phone_number'] as String?,
       surname: json['surname'] as String?,
       surnameDeclines: json['surname_declines'] as bool?,
+      logo: json['logo'] as String?,
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -38,6 +39,7 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'phone_number': instance.phoneNumber,
       'surname': instance.surname,
       'surname_declines': instance.surnameDeclines,
+      'logo': instance.logo,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

@@ -333,6 +333,7 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                           : phone.replaceAll('-', '').replaceAll(' ', ''),
                       surname: surname.isEmpty ? null : surname,
                       surnameDeclines: false,
+                      logo: null,
                     );
                     if (widget.clientModel == null) {
                       await context.read<MainCubit>().addClient(userModel);
