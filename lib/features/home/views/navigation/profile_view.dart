@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart' as svg_provider;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prosto_doc/core/helpers/address_textfield.dart';
 import 'package:prosto_doc/core/helpers/alert_toast.dart';
@@ -579,57 +580,72 @@ class UserAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Container(
-        width: 135.w,
-        height: 135.w,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: AppColors.greyColor,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(100.r),
-          child: UserImage(
-            avatarPath: avatarPath,
-          ),
-        ),
-      ),
+    return CircleAvatar(
+      radius: 67.5,
+      // child: UserImage(avatarPath: avatarPath),
+      foregroundImage: image,
     );
   }
-}
 
-class UserImage extends StatelessWidget {
-  const UserImage({
-    Key? key,
-    required this.avatarPath,
-  }) : super(key: key);
-
-  final String? avatarPath;
-
-  @override
-  Widget build(BuildContext context) {
+  ImageProvider get image {
     if (avatarPath != null) {
       if (avatarPath!.contains('data:image/jpg;base64')) {
-        return Image.memory(
+        return MemoryImage(
           base64Decode(
             avatarPath!.replaceAll('data:image/jpg;base64,', ''),
           ),
-          fit: BoxFit.cover,
         );
       } else {
-        return Image.network(
+        return NetworkImage(
           docUrl + avatarPath!,
-          fit: BoxFit.cover,
         );
       }
     } else {
-      return SvgPicture.asset(
+      return svg_provider.Svg(
         'assets/icons/person.svg',
-        width: 135.w,
-        height: 135.h,
-        fit: BoxFit.cover,
       );
+      // Sbg
+      // SvgPicture.asset(
+      //   'assets/icons/person.svg',
+      //   width: 135.w,
+      //   height: 135.h,
+      //   fit: BoxFit.cover,
+      // );
     }
   }
 }
+
+// class UserImage extends StatelessWidget {
+//   const UserImage({
+//     Key? key,
+//     required this.avatarPath,
+//   }) : super(key: key);
+
+//   final String? avatarPath;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     if (avatarPath != null) {
+//       if (avatarPath!.contains('data:image/jpg;base64')) {
+//         return Image.memory(
+//           base64Decode(
+//             avatarPath!.replaceAll('data:image/jpg;base64,', ''),
+//           ),
+//           fit: BoxFit.cover,
+//         );
+//       } else {
+//         return Image.network(
+//           docUrl + avatarPath!,
+//           fit: BoxFit.cover,
+//         );
+//       }
+//     } else {
+//       return SvgPicture.asset(
+//         'assets/icons/person.svg',
+//         width: 135.w,
+//         height: 135.h,
+//         fit: BoxFit.cover,
+//       );
+//     }
+//   }
+// }
