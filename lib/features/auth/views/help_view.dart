@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:prosto_doc/core/helpers/big_title.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
 import 'package:prosto_doc/core/helpers/current.dart';
+import 'package:prosto_doc/core/helpers/custom_button.dart';
 import 'package:prosto_doc/core/helpers/custom_page_route.dart';
-import 'package:prosto_doc/core/helpers/custom_scaffold.dart';
-import 'package:prosto_doc/core/helpers/custom_text_field.dart';
+import 'package:prosto_doc/core/helpers/new_scaffold.dart';
 import 'package:prosto_doc/features/auth/bloc/auth_cubit.dart';
-import 'package:prosto_doc/features/home/views/bottom_view.dart';
-import 'package:prosto_doc/features/home/views/bottom_view_new.dart';
 
 class HelpView extends StatefulWidget {
   const HelpView({super.key});
@@ -33,52 +31,21 @@ class _HelpViewState extends State<HelpView> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      onPressDone: () async {
-        if (selectedRole != 0) {
-          final auth = context.read<AuthCubit>();
-
-          auth.setUserType(selectedRole == 1 ? 'is_client' : 'is_lawyer');
-          // print('new user ${auth.user?.toJson()}');
-          auth.updateUser();
-          // await context
-          //     .read<AuthCubit>()
-          //     .setToken(selectedRole == 1 ? 'is_client' : 'is_laywer');
-
-          Navigator.pushAndRemoveUntil(
-            context,
-            createRoute(CurrentScreen()),
-            (route) => false,
-          );
-        }
-      },
-      body: SizedBox(
-        height: 152.h,
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 52.w),
-            // child: Text(
-            //   'Чем мы можем\n Вам помочь?',
-            //   style: GoogleFonts.poppins(
-            //     fontWeight: FontWeight.w700,
-            //     fontSize: 20.h,
-            //     color: AppColors.textColor,
-            //     height: 1.2.h,
-            //   ),
-            //   textAlign: TextAlign.center,
-            // ),
-            child:
-                SvgPicture.asset('assets/icons/Чем мы можем вам помочь_.svg'),
-          ),
-        ),
+    return NewScaffold(
+      cardHeight: 152,
+      cardBody: const Center(
+        child: BigTitle(text: 'Чем мы можем\nвам помочь?'),
       ),
-      secondBody: Column(
+      // emptyPadding: 27,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(height: 279),
+          // Flexible(child: SizedBox()),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 21.w),
+            padding: const EdgeInsets.only(top: 40),
             child: Row(
               children: [
+                const SizedBox(width: 22),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -115,7 +82,7 @@ class _HelpViewState extends State<HelpView> {
                           width: 44,
                           height: 55,
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Text(
                           'Мне нужен \n документ',
                           textAlign: TextAlign.center,
@@ -134,7 +101,7 @@ class _HelpViewState extends State<HelpView> {
                     ),
                   ),
                 ),
-                const Expanded(child: SizedBox()),
+                const Spacer(),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -190,7 +157,38 @@ class _HelpViewState extends State<HelpView> {
                     ),
                   ),
                 ),
+                const SizedBox(width: 22),
               ],
+            ),
+          ),
+          // Flexible(
+          //   child: SizedBox(),
+          //   flex: 2,
+          // ),
+
+          Padding(
+            padding: const EdgeInsets.only(bottom: NewScaffold.bottomPadding),
+            child: CustomButton(
+              onTap: () async {
+                if (selectedRole != 0) {
+                  final auth = context.read<AuthCubit>();
+
+                  auth.setUserType(
+                      selectedRole == 1 ? 'is_client' : 'is_lawyer');
+                  // print('new user ${auth.user?.toJson()}');
+                  auth.updateUser();
+                  // await context
+                  //     .read<AuthCubit>()
+                  //     .setToken(selectedRole == 1 ? 'is_client' : 'is_laywer');
+
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    createRoute(const CurrentScreen()),
+                    (route) => false,
+                  );
+                }
+              },
+              title: 'Далее',
             ),
           ),
         ],

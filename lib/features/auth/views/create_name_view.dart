@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
-import 'package:prosto_doc/core/helpers/current.dart';
 import 'package:prosto_doc/core/helpers/custom_button.dart';
 import 'package:prosto_doc/core/helpers/custom_page_route.dart';
-import 'package:prosto_doc/core/helpers/custom_scaffold.dart';
 import 'package:prosto_doc/core/helpers/custom_text_field.dart';
+import 'package:prosto_doc/core/helpers/new_scaffold.dart';
 import 'package:prosto_doc/features/auth/bloc/auth_cubit.dart';
 import 'package:prosto_doc/features/auth/views/help_view.dart';
 
@@ -43,26 +41,15 @@ class _CreateNameViewState extends State<CreateNameView> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      onPressDone: () {
-        if (nameController.text.isEmpty) {
-          setState(() {
-            onError = true;
-          });
-        } else {
-          context.read<AuthCubit>().setName(nameController.text);
-          context.read<AuthCubit>().updateUser();
-          Navigator.push(context, createRoute(const HelpView()));
-          setState(() {
-            onError = false;
-          });
-        }
-      },
-      body: SizedBox(
-        height: 310,
+    return NewScaffold(
+      // emptyPadding: 200,
+      cardHeight: 320,
+      cardBody: SizedBox(
+        height: 320,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 52.w),
               child: Text(
@@ -77,7 +64,7 @@ class _CreateNameViewState extends State<CreateNameView> {
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             CustomTextField(
               hint: 'Введите ваше имя',
               // expand: false,
@@ -86,30 +73,31 @@ class _CreateNameViewState extends State<CreateNameView> {
               isName: true,
               onError: onError,
             ),
-            // Padding(
-            //   padding: EdgeInsets.only(bottom: 20.h, top: 20.h),
-            //   child: Align(
-            //     alignment: Alignment.bottomCenter,
-            //     child: CustomButton(
-            //       onTap: () {
-            //         if (nameController.text.isEmpty) {
-            //           setState(() {
-            //             onError = true;
-            //           });
-            //         } else {
-            //           context.read<AuthCubit>().setName(nameController.text);
-            //           context.read<AuthCubit>().updateUser();
-            //           Navigator.push(context, createRoute(const HelpView()));
-            //           setState(() {
-            //             onError = false;
-            //           });
-            //         }
-            //       },
-            //       title: 'Далее',
-            //     ),
-            //   ),
-            // ),
+            // SizedBox(height: 76),
           ],
+        ),
+      ),
+      body: Align(
+        alignment: Alignment.bottomCenter,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: NewScaffold.bottomPadding),
+          child: CustomButton(
+            onTap: () {
+              if (nameController.text.isEmpty) {
+                setState(() {
+                  onError = true;
+                });
+              } else {
+                context.read<AuthCubit>().setName(nameController.text);
+                context.read<AuthCubit>().updateUser();
+                Navigator.push(context, createRoute(const HelpView()));
+                setState(() {
+                  onError = false;
+                });
+              }
+            },
+            title: 'Далее',
+          ),
         ),
       ),
     );

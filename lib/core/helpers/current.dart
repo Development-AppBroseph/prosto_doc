@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prosto_doc/features/auth/bloc/auth_cubit.dart';
 import 'package:prosto_doc/features/auth/views/auth_view.dart';
+import 'package:prosto_doc/features/auth/views/create_name_view.dart';
+import 'package:prosto_doc/features/auth/views/help_view.dart';
 import 'package:prosto_doc/features/home/bloc/main_cubit.dart';
 import 'package:prosto_doc/features/home/views/bottom_view_new.dart';
 
@@ -46,6 +48,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
       builder: (context, state) {
         print(state);
         print(state is AuthLogin);
+        return HelpView();
         if (state is AuthLogin || state is GetUserSuccess) {
           return Stack(
             children: [
