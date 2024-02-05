@@ -385,6 +385,7 @@ class _ProfileViewState extends State<ProfileView> {
                       //     SizedBox(height: 25.h),
                     ],
                   ),
+                if (authCubit.user?.email == null) const SizedBox(height: 25),
                 if (authCubit.user?.email == null)
                   CustomButton(
                     onTap: () async {
