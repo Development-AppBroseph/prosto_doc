@@ -10,9 +10,9 @@ class TextFieldTheme {
   static DecoratedInputBorder makeBorder(Color color) => DecoratedInputBorder(
         shadow: const [
           BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.25),
+            color: Color.fromRGBO(0, 0, 0, 0.15),
             offset: Offset(0, 0),
-            blurRadius: 2,
+            blurRadius: 4,
           ),
         ],
         child: OutlineInputBorder(

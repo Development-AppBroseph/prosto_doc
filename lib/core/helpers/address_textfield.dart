@@ -59,6 +59,10 @@ class AddressTextField extends StatelessWidget {
         focusedBorder: TextFieldTheme.focusBorder,
         enabledBorder: TextFieldTheme.defaulBorder,
         border: TextFieldTheme.defaulBorder,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
+        ),
         hintText: hint,
         hintStyle: GoogleFonts.poppins(
           fontWeight: FontWeight.w400,

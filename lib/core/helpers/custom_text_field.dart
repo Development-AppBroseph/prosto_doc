@@ -121,6 +121,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
             enabledBorder: TextFieldTheme.defaulBorder,
             disabledBorder: TextFieldTheme.defaulBorder,
             border: TextFieldTheme.defaulBorder,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 20,
+            ),
           ),
           keyboardType:
               widget.isCode || widget.isPhone ? TextInputType.phone : null,
