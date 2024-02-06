@@ -48,7 +48,6 @@ class _CurrentScreenState extends State<CurrentScreen> {
       builder: (context, state) {
         print(state);
         print(state is AuthLogin);
-        return HelpView();
         if (state is AuthLogin || state is GetUserSuccess) {
           return Stack(
             children: [

@@ -189,7 +189,7 @@ class MainCubit extends Cubit<MainState> {
 
   Future<UserModel?> addClient(UserModel client) async {
     final data = jsonEncode(client.toJson());
-    // print(data);
+    print(data);
     try {
       Response response = await dio.post(
         '$baseUrl/api/v1/lawyer-clients/',
@@ -205,7 +205,7 @@ class MainCubit extends Cubit<MainState> {
       }
     } on DioException catch (e) {
       print(e.response?.data);
-      throw "${e.message}";
+      throw "Bad add client";
     }
   }
 

@@ -502,41 +502,7 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                 ),
-                SizedBox(height: 45.h),
-                GestureDetector(
-                  onTap: () async {
-                    await deleteDialog(
-                      context: context,
-                      title: 'Вы действительно\nхотите удалить\fаккаунт?',
-                      onConfirm: () async {
-                        context.read<AuthCubit>().deleteAccount();
-                      },
-                    );
-                  },
-                  child: Container(
-                    height: 23.h,
-                    color: Colors.transparent,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/trash_fill.svg',
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Text(
-                          'Удалить аккаунт',
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16.h,
-                            color: const Color.fromRGBO(174, 29, 29, 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+
                 const SizedBox(height: 150),
               ],
             ),

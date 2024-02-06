@@ -80,7 +80,7 @@ class _ClientInfoViewState extends State<ClientInfoView> {
     DownloadedDocument? downloadedDocument =
         await context.read<MainCubit>().downloadDocument(
       documentId,
-      widget.clientModel!.id,
+      widget.clientModel!.id!,
       [],
     );
 
@@ -106,7 +106,7 @@ class _ClientInfoViewState extends State<ClientInfoView> {
   getDocuments() async {
     DocumentModel? documentModel = await context
         .read<MainCubit>()
-        .getClientDocuments(widget.clientModel!.id);
+        .getClientDocuments(widget.clientModel!.id!);
 
     if (documentModel != null) {
       setState(() {

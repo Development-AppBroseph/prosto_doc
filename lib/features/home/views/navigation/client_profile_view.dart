@@ -314,7 +314,7 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                     final phone = phoneController.text;
                     UserModel userModel = UserModel(
                       id: widget.clientModel == null
-                          ? 0
+                          ? null
                           : widget.clientModel!.id,
                       activeRole: null,
                       addressRegistration: address.isEmpty ? null : address,
