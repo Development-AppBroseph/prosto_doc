@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prosto_doc/core/helpers/api_constants.dart';
+import 'package:prosto_doc/core/helpers/back_button.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
 import 'package:prosto_doc/core/helpers/custom_button.dart';
 import 'package:prosto_doc/core/helpers/custom_page_route.dart';
@@ -67,21 +68,8 @@ class _ClientsViewState extends State<ClientsView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 29.h, top: 16.h),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          height: 20.h,
-                          width: 20.w,
-                          color: Colors.transparent,
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(
-                            'assets/icons/arrow.svg',
-                          ),
-                        ),
-                      ),
+                      padding: EdgeInsets.only(left: 9.h, top: 16.h),
+                      child: CustomBackButton(),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10.h),
@@ -96,11 +84,8 @@ class _ClientsViewState extends State<ClientsView> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(right: 29.h, top: 16.h),
-                      child: SizedBox(
-                        height: 20.h,
-                        width: 20.w,
-                      ),
+                      padding: EdgeInsets.only(right: 9.h, top: 16.h),
+                      child: CustomBackButton.fake(),
                     ),
                   ],
                 ),

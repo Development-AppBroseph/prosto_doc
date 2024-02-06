@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:prosto_doc/core/helpers/address_textfield.dart';
 import 'package:prosto_doc/core/helpers/api_constants.dart';
+import 'package:prosto_doc/core/helpers/back_button.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
 import 'package:prosto_doc/core/helpers/custom_button.dart';
 import 'package:prosto_doc/core/helpers/custom_text_field.dart';
@@ -88,21 +89,8 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 29.h, top: 16.h),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        height: 20.h,
-                        width: 20.w,
-                        color: Colors.transparent,
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(
-                          'assets/icons/arrow.svg',
-                        ),
-                      ),
-                    ),
+                    padding: EdgeInsets.only(left: 9.h, top: 16.h),
+                    child: CustomBackButton(),
                   ),
                 ],
               ),
