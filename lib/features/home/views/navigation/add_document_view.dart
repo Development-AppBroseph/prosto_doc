@@ -413,8 +413,9 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                       textEditingController: nameController,
                     ),
                     SizedBox(height: 40.h),
-                    GestureDetector(
-                      onTap: () async {
+                    DocumentBlock(
+                      hasFile: selectedFile != null,
+                      onAddFile: () async {
                         nameFocus.unfocus();
                         FilePickerResult? result =
                             await FilePicker.platform.pickFiles();
@@ -432,42 +433,6 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                           // User canceled the picker
                         }
                       },
-                      child: Container(
-                        // height: 153.h,
-                        width: double.infinity,
-                        margin: EdgeInsets.symmetric(horizontal: 22.w),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.r),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.blackColor.withOpacity(0.25),
-                              blurRadius: 2.r,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 21.h),
-                            SvgPicture.asset(
-                              'assets/icons/add.svg',
-                              height: 30.h,
-                              width: 30.w,
-                            ),
-                            SizedBox(height: 10.h),
-                            Text(
-                              'Добавление\nдокумента',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 24.h,
-                                color: AppColors.greyColor,
-                              ),
-                            ),
-                            SizedBox(height: 20.h),
-                          ],
-                        ),
-                      ),
                     ),
                     SizedBox(height: 90.h),
                     CustomButton(
@@ -481,6 +446,8 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                             if (selectedFile!.path.contains('.docx') ||
                                 selectedFile!.path.contains('.doc')) {
                               showAlertToast('Документ добавляется');
+                              nameFocus.unfocus();
+                              Navigator.pop(context);
                               var result =
                                   await context.read<MainCubit>().addDocument(
                                         categories[currentIndex!].id,
@@ -488,12 +455,11 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                                         selectedFile!,
                                         nameController.text,
                                       );
+
                               if (result != null) {
-                                nameFocus.unfocus();
-                                // Nai
-                                // Navigator.pop(context);
+                                // nameFocus.unfocus();
                               } else {
-                                nameFocus.unfocus();
+                                // nameFocus.unfocus();
                                 showAlertToast('Ошибка сервера');
                               }
                             } else {
@@ -507,7 +473,6 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                           }
                           // Navigator.pop(context);
                         }
-                        setState(() {});
                       },
                       title: 'Далее',
                     ),
@@ -516,6 +481,149 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                 )
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class DocumentBlock extends StatelessWidget {
+  final Future<void> Function() onAddFile;
+  final bool hasFile;
+
+  const DocumentBlock(
+      {required this.onAddFile, required this.hasFile, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    if (!hasFile) {
+      return BigAddDocButton(
+        onBigTap: onAddFile,
+      );
+    } else {
+      return Row(
+        children: [
+          SizedBox(width: 22),
+          DocIcon(),
+          SizedBox(width: 16),
+          SmallAddDocButton(
+            onSmallTap: onAddFile,
+          ),
+        ],
+      );
+    }
+  }
+}
+
+class DocIcon extends StatelessWidget {
+  const DocIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 90,
+      width: 90,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.r),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.blackColor.withOpacity(0.25),
+            blurRadius: 2.r,
+          ),
+        ],
+      ),
+      child: Center(
+        child: SvgPicture.asset(
+          'assets/icons/doc2.svg',
+          width: 39,
+          height: 49,
+        ),
+      ),
+    );
+  }
+}
+
+class SmallAddDocButton extends StatelessWidget {
+  const SmallAddDocButton({required this.onSmallTap, super.key});
+
+  final Future<void> Function() onSmallTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onSmallTap,
+      child: Container(
+        height: 90,
+        width: 90,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.r),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.blackColor.withOpacity(0.25),
+              blurRadius: 2.r,
+            ),
+          ],
+        ),
+        child: Center(
+          child: SvgPicture.asset(
+            'assets/icons/add.svg',
+            width: 30,
+            height: 30,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class BigAddDocButton extends StatelessWidget {
+  const BigAddDocButton({
+    required this.onBigTap,
+    super.key,
+  });
+
+  final Future<void> Function() onBigTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onBigTap,
+      child: Container(
+        // height: 153.h,
+        width: double.infinity,
+        margin: EdgeInsets.symmetric(horizontal: 22.w),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.r),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.blackColor.withOpacity(0.25),
+              blurRadius: 2.r,
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 21.h),
+            SvgPicture.asset(
+              'assets/icons/add.svg',
+              height: 30.h,
+              width: 30.w,
+            ),
+            SizedBox(height: 10.h),
+            Text(
+              'Добавление\nдокумента',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w700,
+                fontSize: 24.h,
+                color: AppColors.greyColor,
+              ),
+            ),
+            SizedBox(height: 20.h),
+          ],
         ),
       ),
     );
