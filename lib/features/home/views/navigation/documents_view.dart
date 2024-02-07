@@ -5,20 +5,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:prosto_doc/core/helpers/api_constants.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
 import 'package:prosto_doc/core/helpers/custom_page_route.dart';
-import 'package:prosto_doc/core/helpers/custom_scaffold.dart';
 import 'package:prosto_doc/core/helpers/dialogs.dart';
+import 'package:prosto_doc/core/helpers/documents_scaffold.dart';
 import 'package:prosto_doc/core/helpers/helpers.dart';
 import 'package:prosto_doc/core/models/document_model.dart';
 import 'package:prosto_doc/core/models/downloaded_document.dart';
 import 'package:prosto_doc/core/models/user_model.dart';
 import 'package:prosto_doc/features/home/bloc/main_cubit.dart';
 import 'package:prosto_doc/features/home/views/navigation/current_document_view.dart';
-import 'package:share_plus/share_plus.dart';
 
 class DocumentsView extends StatefulWidget {
   const DocumentsView({super.key});
@@ -98,186 +98,175 @@ class _DocumentsViewState extends State<DocumentsView> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      small: true,
-      main: true,
-      isScroll: true,
-      body: Center(
-        child: SizedBox(
-          height: 84.h,
-          child: Center(
-            child: SizedBox(
-              child: SvgPicture.asset(
-                'assets/icons/Мои документы.svg',
-                height: 24.h,
-              ),
-            ),
-          ),
-        ),
-      ),
-      secondBody:
-          BlocBuilder<MainCubit, MainState>(buildWhen: (previous, current) {
-        if (current is MyDocumentGeted) {
-          documents = current.documents;
-        }
-        return true;
-      }, builder: (context, snapshot) {
-        return ListView.builder(
-          padding: EdgeInsets.only(top: 30.h, bottom: 90.h),
-          itemCount: documents.length,
-          // physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            GlobalKey globalKey = GlobalKey();
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  createRoute(CurrentDocumentView(item: documents[index])),
-                );
-              },
-              child: Container(
-                height: 136.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20.r),
-                ),
-                margin: EdgeInsets.symmetric(horizontal: 21.w, vertical: 10.h),
-                child: Stack(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20.h),
-                        Padding(
-                          padding: EdgeInsets.only(left: 22.w),
-                          child: Text(
-                            documents[index].title,
-                            style: GoogleFonts.poppins(
-                              fontSize: 16.h,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.textColor,
+    return DocumentsScaffold(
+      body: BlocBuilder<MainCubit, MainState>(
+        buildWhen: (previous, current) {
+          if (current is MyDocumentGeted) {
+            documents = current.documents;
+          }
+          return true;
+        },
+        builder: (context, snapshot) {
+          return ListView.builder(
+            padding: const EdgeInsets.only(top: 16),
+            itemCount: documents.length,
+            // physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              GlobalKey globalKey = GlobalKey();
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    createRoute(CurrentDocumentView(item: documents[index])),
+                  );
+                },
+                child: Container(
+                  height: 136.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 21.w, vertical: 10.h),
+                  child: Stack(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20.h),
+                          Padding(
+                            padding: EdgeInsets.only(left: 22.w),
+                            child: Text(
+                              documents[index].title,
+                              style: GoogleFonts.poppins(
+                                fontSize: 16.h,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.textColor,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 18.h),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 22.w),
-                              child: Text(
-                                'Дата создания: ',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 12.h,
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColors.textColor,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              documents[index].dateCreated.toString(),
-                              style: GoogleFonts.poppins(
-                                fontSize: 12.h,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.blackColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                iconSelectModal(
-                                  context,
-                                  getWidgetPosition(globalKey),
-                                  (widgetIndex) {
-                                    deleteDialog(
-                                      context: context,
-                                      title:
-                                          'Вы действительно\nхотите удалить\nдокумент?',
-                                      onConfirm: () async {
-                                        bool? result = await context
-                                            .read<MainCubit>()
-                                            .deleteDocument(
-                                              documents[index].id,
-                                            );
-                                        if (result != null) {
-                                          await context
-                                              .read<MainCubit>()
-                                              .getMyDocuments();
-                                        }
-                                        // Navigator.pop(context);
-                                      },
-                                    );
-                                  },
-                                );
-                              },
-                              child: Container(
-                                height: 26.h,
-                                width: 26.w,
-                                key: globalKey,
-                                color: Colors.transparent,
-                                margin: EdgeInsets.only(left: 22.w),
-                                child: SvgPicture.asset(
-                                  'assets/icons/more.svg',
-                                  height: 6.h,
-                                  width: 26.h,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                if (documents[index].pdfFileLocation != null) {
-                                  // Share.share(docUrl +
-                                  //     documents[index].pdfFileLocation!);
-                                  downloadDocument(documents[index]);
-                                }
-                              },
-                              child: Container(
-                                height: 26.h,
-                                width: 111.w,
-                                margin: EdgeInsets.only(right: 12.w),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(60.r),
-                                  color: AppColors.buttonBlueColor,
-                                ),
+                          SizedBox(height: 18.h),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 22.w),
                                 child: Text(
-                                  'Поделиться',
+                                  'Дата создания: ',
                                   style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w700,
                                     fontSize: 12.h,
-                                    color: AppColors.whiteColor,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.textColor,
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          color: Colors.transparent,
-                          margin: EdgeInsets.only(top: 17.h, right: 16.w),
-                          child:
-                              SvgPicture.asset('assets/icons/docs_brown.svg'),
-                        ),
+                              Text(
+                                DateFormat('d MMMM, y год', 'ru')
+                                    .format(documents[index].dateCreated),
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12.h,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  iconSelectModal(
+                                    context,
+                                    getWidgetPosition(globalKey),
+                                    (widgetIndex) {
+                                      deleteDialog(
+                                        context: context,
+                                        title:
+                                            'Вы действительно\nхотите удалить\nдокумент?',
+                                        onConfirm: () async {
+                                          bool? result = await context
+                                              .read<MainCubit>()
+                                              .deleteDocument(
+                                                documents[index].id,
+                                              );
+                                          if (result != null) {
+                                            await context
+                                                .read<MainCubit>()
+                                                .getMyDocuments();
+                                          }
+                                          // Navigator.pop(context);
+                                        },
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: 26.h,
+                                  width: 26.w,
+                                  key: globalKey,
+                                  color: Colors.transparent,
+                                  margin: EdgeInsets.only(left: 22.w),
+                                  child: SvgPicture.asset(
+                                    'assets/icons/more.svg',
+                                    height: 6.h,
+                                    width: 26.h,
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  if (documents[index].pdfFileLocation !=
+                                      null) {
+                                    // Share.share(docUrl +
+                                    //     documents[index].pdfFileLocation!);
+                                    downloadDocument(documents[index]);
+                                  }
+                                },
+                                child: Container(
+                                  height: 26.h,
+                                  width: 111.w,
+                                  margin: EdgeInsets.only(right: 12.w),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(60.r),
+                                    color: AppColors.buttonBlueColor,
+                                  ),
+                                  child: Text(
+                                    'Поделиться',
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 12.h,
+                                      color: AppColors.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                    )
-                  ],
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            color: Colors.transparent,
+                            margin: EdgeInsets.only(top: 17.h, right: 16.w),
+                            child:
+                                SvgPicture.asset('assets/icons/docs_brown.svg'),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
-        );
-      }),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -390,7 +379,7 @@ class _DocumentsViewState extends State<DocumentsView> {
           else
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: SvgPicture.asset(
                 'assets/icons/person.svg',
                 height: 40,
