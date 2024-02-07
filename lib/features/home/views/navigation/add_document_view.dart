@@ -32,8 +32,11 @@ class _AddDocumentViewState extends State<AddDocumentView> {
 
   FocusNode nameFocus = FocusNode();
 
-  bool isOpenCategories = false;
-  bool isOpenAvaibility = false;
+  final ValueNotifier<bool> isOpenCategories = ValueNotifier(false);
+  final ValueNotifier<bool> isOpenAvaibility = ValueNotifier(false);
+
+  // bool isOpenCategories = false;
+  // bool isOpenAvaibility = false;
 
   bool switchValue = true;
   List<Categories> categories = [];
@@ -170,94 +173,96 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                   children: [
                     SizedBox(height: 66.h),
                     AnimatedContainer(
-                      height: isOpenCategories ? 205.h : 52.h,
+                      height: isOpenCategories.value ? 205.h : 52.h,
                       duration: const Duration(milliseconds: 200),
                       child: Stack(
                         children: [
-                          AnimatedContainer(
-                            height: isOpenCategories ? 205.h : 12.h,
-                            duration: const Duration(milliseconds: 200),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(20.r),
-                                bottomLeft: Radius.circular(20.r),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color.fromRGBO(0, 0, 0, 0.25),
-                                  offset: const Offset(0, 0),
-                                  blurRadius: 2.r,
+                          Padding(
+                            padding: EdgeInsets.only(top: 28),
+                            child: AnimatedContainer(
+                              height: isOpenCategories.value ? 205.h : 12.h,
+                              duration: const Duration(milliseconds: 200),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(20.r),
+                                  bottomLeft: Radius.circular(20.r),
                                 ),
-                              ],
-                              border: isOpenCategories
-                                  ? Border.all(
-                                      width: 2.w,
-                                      color: AppColors.buttonBlueColor,
-                                    )
-                                  : null,
-                            ),
-                            margin: EdgeInsets.symmetric(horizontal: 20.w).add(
-                              EdgeInsets.only(top: 20.h),
-                            ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  // SizedBox(height: 55.h),
-                                  SizedBox(
-                                    height: 200.h,
-                                    child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: categories.length,
-                                        padding: EdgeInsets.only(
-                                          top: 60.h,
-                                          bottom: 20.h,
-                                        ),
-                                        itemBuilder: (context, index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                currentIndex = index;
-                                                categoryController.text =
-                                                    categories[index].name ??
-                                                        '';
-
-                                                isOpenCategories =
-                                                    !isOpenCategories;
-                                                categoryFocus.requestFocus();
-                                              });
-                                            },
-                                            child: Container(
-                                              height: 40.h,
-                                              width: double.infinity,
-                                              child: Row(
-                                                children: [
-                                                  SizedBox(width: 25.w),
-                                                  Text(
-                                                    categories[index].name ??
-                                                        '',
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 14.h,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color:
-                                                          AppColors.blackColor,
-                                                    ),
-                                                  ),
-                                                  const Expanded(
-                                                      child: SizedBox()),
-                                                  if (currentIndex == index)
-                                                    SvgPicture.asset(
-                                                        'assets/icons/Vector 13.svg'),
-                                                  SizedBox(width: 25.w),
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        }),
-                                  )
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color.fromRGBO(0, 0, 0, 0.25),
+                                    offset: const Offset(0, 0),
+                                    blurRadius: 2.r,
+                                  ),
                                 ],
+                                border: isOpenCategories.value
+                                    ? Border.all(
+                                        width: 2.w,
+                                        color: AppColors.buttonBlueColor,
+                                      )
+                                    : null,
+                              ),
+                              margin: EdgeInsets.symmetric(horizontal: 22),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    // SizedBox(height: 55.h),
+                                    SizedBox(
+                                      height: 200.h,
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: categories.length,
+                                          padding: EdgeInsets.only(
+                                            top: 40,
+                                            bottom: 20.h,
+                                          ),
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  currentIndex = index;
+                                                  categoryController.text =
+                                                      categories[index].name ??
+                                                          '';
+
+                                                  isOpenCategories.value =
+                                                      !isOpenCategories.value;
+                                                  categoryFocus.requestFocus();
+                                                });
+                                              },
+                                              child: Container(
+                                                height: 40.h,
+                                                width: double.infinity,
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(width: 25.w),
+                                                    Text(
+                                                      categories[index].name ??
+                                                          '',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 14.h,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: AppColors
+                                                            .blackColor,
+                                                      ),
+                                                    ),
+                                                    const Expanded(
+                                                        child: SizedBox()),
+                                                    if (currentIndex == index)
+                                                      SvgPicture.asset(
+                                                          'assets/icons/Vector 13.svg'),
+                                                    SizedBox(width: 25.w),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -270,11 +275,13 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                               //     () {
                               print(123);
                               setState(() {
-                                isOpenCategories = !isOpenCategories;
+                                isOpenCategories.value =
+                                    !isOpenCategories.value;
                                 categoryFocus.requestFocus();
                               });
                               // });
                             },
+                            listenable: isOpenCategories,
                             focusNode: categoryFocus,
                             textEditingController: categoryController,
                           ),
@@ -283,94 +290,96 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                     ),
                     SizedBox(height: 20.h),
                     AnimatedContainer(
-                      height: isOpenAvaibility ? 155.h : 52.h,
+                      height: isOpenAvaibility.value ? 155.h : 52.h,
                       duration: const Duration(milliseconds: 200),
                       child: Stack(
                         children: [
-                          AnimatedContainer(
-                            height: isOpenAvaibility ? 205.h : 12.h,
-                            duration: const Duration(milliseconds: 200),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(20.r),
-                                bottomLeft: Radius.circular(20.r),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color.fromRGBO(0, 0, 0, 0.25),
-                                  offset: const Offset(0, 0),
-                                  blurRadius: 2.r,
+                          Padding(
+                            padding: EdgeInsets.only(top: 28),
+                            child: AnimatedContainer(
+                              height: isOpenAvaibility.value ? 205.h : 12.h,
+                              duration: const Duration(milliseconds: 200),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(20.r),
+                                  bottomLeft: Radius.circular(20.r),
                                 ),
-                              ],
-                              border: isOpenAvaibility
-                                  ? Border.all(
-                                      width: 2.w,
-                                      color: AppColors.buttonBlueColor,
-                                    )
-                                  : null,
-                            ),
-                            margin: EdgeInsets.symmetric(horizontal: 20.w).add(
-                              EdgeInsets.only(top: 20.h),
-                            ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  // SizedBox(height: 55.h),
-                                  SizedBox(
-                                    height: 200.h,
-                                    child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: 2,
-                                        padding: EdgeInsets.only(
-                                            top: 40.h, bottom: 20.h),
-                                        itemBuilder: (context, index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                currentCategoryIndex = index;
-                                                avaibilityController.text =
-                                                    index == 0
-                                                        ? 'Общедоступный'
-                                                        : 'Персональный';
-                                                isOpenAvaibility =
-                                                    !isOpenAvaibility;
-                                                categoryFocus.requestFocus();
-                                              });
-                                            },
-                                            child: Container(
-                                              height: 40.h,
-                                              width: double.infinity,
-                                              child: Row(
-                                                children: [
-                                                  SizedBox(width: 25.w),
-                                                  Text(
-                                                    index == 0
-                                                        ? 'Общедоступный'
-                                                        : 'Персональный',
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 14.h,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color:
-                                                          AppColors.blackColor,
-                                                    ),
-                                                  ),
-                                                  const Expanded(
-                                                      child: SizedBox()),
-                                                  if (currentCategoryIndex ==
-                                                      index)
-                                                    SvgPicture.asset(
-                                                        'assets/icons/Vector 13.svg'),
-                                                  SizedBox(width: 25.w),
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        }),
-                                  )
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color.fromRGBO(0, 0, 0, 0.25),
+                                    offset: const Offset(0, 0),
+                                    blurRadius: 2.r,
+                                  ),
                                 ],
+                                border: isOpenAvaibility.value
+                                    ? Border.all(
+                                        width: 2.w,
+                                        color: AppColors.buttonBlueColor,
+                                      )
+                                    : null,
+                              ),
+                              margin: EdgeInsets.symmetric(horizontal: 22),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    // SizedBox(height: 55),
+                                    SizedBox(
+                                      height: 200.h,
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: 2,
+                                          padding: EdgeInsets.only(
+                                              top: 40.h, bottom: 20.h),
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  currentCategoryIndex = index;
+                                                  avaibilityController.text =
+                                                      index == 0
+                                                          ? 'Общедоступный'
+                                                          : 'Персональный';
+                                                  isOpenAvaibility.value =
+                                                      !isOpenAvaibility.value;
+                                                  categoryFocus.requestFocus();
+                                                });
+                                              },
+                                              child: Container(
+                                                height: 40.h,
+                                                width: double.infinity,
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(width: 25.w),
+                                                    Text(
+                                                      index == 0
+                                                          ? 'Общедоступный'
+                                                          : 'Персональный',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 14.h,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: AppColors
+                                                            .blackColor,
+                                                      ),
+                                                    ),
+                                                    const Expanded(
+                                                        child: SizedBox()),
+                                                    if (currentCategoryIndex ==
+                                                        index)
+                                                      SvgPicture.asset(
+                                                          'assets/icons/Vector 13.svg'),
+                                                    SizedBox(width: 25.w),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -383,11 +392,13 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                               //     () {
                               print(123);
                               setState(() {
-                                isOpenAvaibility = !isOpenAvaibility;
+                                isOpenAvaibility.value =
+                                    !isOpenAvaibility.value;
                                 categoryFocus.requestFocus();
                               });
                               // });
                             },
+                            listenable: isOpenAvaibility,
                             focusNode: categoryFocus,
                             textEditingController: avaibilityController,
                           ),

@@ -5,8 +5,10 @@ import 'package:prosto_doc/core/helpers/current.dart';
 import 'package:prosto_doc/features/auth/bloc/auth_cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:prosto_doc/features/home/bloc/main_cubit.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
+  initializeDateFormatting('ru_RU', null);
   runApp(const MyApp());
 }
 

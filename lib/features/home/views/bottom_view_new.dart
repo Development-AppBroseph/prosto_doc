@@ -5,8 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:navbar_router/navbar_router.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
-import 'package:prosto_doc/features/auth/bloc/auth_cubit.dart';
-import 'package:prosto_doc/features/auth/views/auth_view.dart';
 import 'package:prosto_doc/features/home/bloc/main_cubit.dart';
 import 'package:prosto_doc/features/home/views/navigation/documents_view.dart';
 import 'package:prosto_doc/features/home/views/navigation/main_categories_view.dart';
@@ -30,10 +28,8 @@ class _HomePageState extends State<HomePage> {
 
   final Map<int, Map<String, Widget>> _routes = {
     0: {
-      '/': Padding(
-        padding: EdgeInsets.only(bottom: 30.h),
-        child: const MainCategoriesView(),
-      ),
+      '/': const MainCategoriesView(),
+
       // 'main_categories': AuthView(),
     },
     1: {

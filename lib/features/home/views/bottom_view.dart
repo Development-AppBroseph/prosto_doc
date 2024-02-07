@@ -10,6 +10,8 @@ class BottomView extends StatefulWidget {
 
   @override
   State<BottomView> createState() => _BottomViewState();
+
+  static const height = 86.0;
 }
 
 class _BottomViewState extends State<BottomView> {
@@ -25,7 +27,7 @@ class _BottomViewState extends State<BottomView> {
         ],
       ),
       bottomNavigationBar: Container(
-        height: 86.h,
+        height: BottomView.height,
         child: BottomNavigationBar(
           selectedItemColor: AppColors.textColor,
           unselectedItemColor: AppColors.greyColor,

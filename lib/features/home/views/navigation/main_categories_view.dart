@@ -5,18 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prosto_doc/core/helpers/api_constants.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
-import 'package:prosto_doc/core/helpers/custom_scaffold.dart';
-import 'package:prosto_doc/core/helpers/custom_scaffold_categories.dart';
 import 'package:prosto_doc/core/helpers/custom_text_field.dart';
 import 'package:prosto_doc/core/helpers/helpers.dart';
-import 'package:prosto_doc/core/helpers/lists.dart';
+import 'package:prosto_doc/core/helpers/new_main_scaffold.dart';
 import 'package:prosto_doc/core/models/category_model.dart';
-import 'package:prosto_doc/core/models/category_model_old.dart';
-import 'dart:math' as math;
 
-import 'package:prosto_doc/features/auth/views/code_view.dart';
 import 'package:prosto_doc/features/home/bloc/main_cubit.dart';
-import 'package:prosto_doc/features/home/views/navigation/current_category_view.dart';
 import 'package:prosto_doc/features/home/views/navigation/sub_categories_view.dart';
 
 import '../../../../core/helpers/custom_page_route.dart';
@@ -63,12 +57,11 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffoldCategories(
-      main: true,
+    return NewMainScaffold(
       body: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 33),
+          const SizedBox(height: 33),
           Center(
             child: Text(
               'Категории',
@@ -80,7 +73,7 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           CustomTextField(
             hint: 'Поиск документов...',
             isPhone: false,
@@ -88,7 +81,7 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
             // expand: false,
             textEditingController: searchController,
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           if (searchedCategories.isEmpty && searching)
             Flexible(
               child: SingleChildScrollView(
@@ -110,37 +103,10 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 33),
+                    const SizedBox(height: 33),
                     Image.asset('assets/images/nothing_found.png'),
-                    // Row(
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     SvgPicture.asset(
-                    //       'assets/icons/dino_questions.svg',
-                    //       width: 165.w,
-                    //       height: 171.h,
-                    //     ),
-                    //     const Expanded(child: SizedBox()),
-                    //     Padding(
-                    //       padding: const EdgeInsets.all(8.0),
-                    //       child: SvgPicture.asset(
-                    //         'assets/icons/question.svg',
-                    //         width: 10.6.w,
-                    //         height: 16.6.h,
-                    //       ),
-                    //     ),
-                    //     Transform(
-                    //       alignment: Alignment.center,
-                    //       transform: Matrix4.rotationY(math.pi),
-                    //       child: SvgPicture.asset(
-                    //         'assets/icons/dino.svg',
-                    //         width: 67.w,
-                    //         height: 101.h,
-                    //       ),
-                    //     )
-                    //   ],
-                    // ),
-                    SizedBox(height: 32),
+
+                    const SizedBox(height: 32),
                   ],
                 ),
               ),
@@ -148,7 +114,7 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
           else
             Flexible(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 22),
+                padding: const EdgeInsets.symmetric(horizontal: 22),
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
@@ -231,9 +197,14 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
                 ),
               ),
             ),
-          const SizedBox(height: 8),
+
+          // const SizedBox(height: 8),
         ],
       ),
     );
+    // return CustomScaffoldCategories(
+    //   main: true,
+    //   body:
+    // );
   }
 }

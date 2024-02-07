@@ -104,7 +104,7 @@ Future<void> deleteDialog({
             right: 16.w,
             bottom: 47.h,
           ),
-          height: 380.h,
+          // height: 380.h,
           decoration: BoxDecoration(
               color: AppColors.whiteColor,
               borderRadius: BorderRadius.circular(16.r)),
