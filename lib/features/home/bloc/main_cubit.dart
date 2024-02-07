@@ -21,7 +21,7 @@ const storage = FlutterSecureStorage();
 
 class MainCubit extends Cubit<MainState> {
   String role = '';
-  MainCubit() : super(MainInitial());
+  MainCubit() : super(MainState([]));
 
   Future<SendCodePhone?> sendCodePhone(String phone) async {
     try {
@@ -134,8 +134,7 @@ class MainCubit extends Cubit<MainState> {
       );
 
       if (response.statusCode == 200) {
-        emit(MyDocumentGeted(
-            documents: DocumentModel.fromJson(response.data).items));
+        emit(MainState(DocumentModel.fromJson(response.data).items));
         return DocumentModel.fromJson(response.data);
       } else {
         return null;

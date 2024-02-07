@@ -31,7 +31,7 @@ class CustomScaffoldCategories extends StatelessWidget {
   }
 
   Widget mainBody(BuildContext context) {
-    print(backgroundColor);
+    // print(backgroundColor);
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundColor,

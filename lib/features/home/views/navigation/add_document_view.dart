@@ -12,14 +12,12 @@ import 'package:prosto_doc/core/helpers/back_button.dart';
 import 'package:prosto_doc/core/helpers/colors.dart';
 import 'package:prosto_doc/core/helpers/custom_button.dart';
 import 'package:prosto_doc/core/helpers/custom_text_field.dart';
-import 'package:prosto_doc/core/helpers/images.dart';
 import 'package:prosto_doc/core/models/category_model.dart';
-import 'package:prosto_doc/core/models/user_model.dart';
 import 'package:prosto_doc/features/auth/bloc/auth_cubit.dart';
 import 'package:prosto_doc/features/home/bloc/main_cubit.dart';
 
 class AddDocumentView extends StatefulWidget {
-  AddDocumentView({super.key});
+  const AddDocumentView({super.key});
 
   @override
   State<AddDocumentView> createState() => _AddDocumentViewState();
@@ -178,7 +176,7 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                       child: Stack(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 28),
+                            padding: const EdgeInsets.only(top: 28),
                             child: AnimatedContainer(
                               height: isOpenCategories.value ? 205.h : 12.h,
                               duration: const Duration(milliseconds: 200),
@@ -203,7 +201,8 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                                       )
                                     : null,
                               ),
-                              margin: EdgeInsets.symmetric(horizontal: 22),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 22),
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
@@ -295,7 +294,7 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                       child: Stack(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 28),
+                            padding: const EdgeInsets.only(top: 28),
                             child: AnimatedContainer(
                               height: isOpenAvaibility.value ? 205.h : 12.h,
                               duration: const Duration(milliseconds: 200),
@@ -320,7 +319,8 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                                       )
                                     : null,
                               ),
-                              margin: EdgeInsets.symmetric(horizontal: 22),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 22),
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
@@ -490,7 +490,8 @@ class _AddDocumentViewState extends State<AddDocumentView> {
                                       );
                               if (result != null) {
                                 nameFocus.unfocus();
-                                Navigator.pop(context);
+                                // Nai
+                                // Navigator.pop(context);
                               } else {
                                 nameFocus.unfocus();
                                 showAlertToast('Ошибка сервера');

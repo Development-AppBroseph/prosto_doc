@@ -70,7 +70,7 @@ Future<String> getFilePath(uniqueFileName) async {
 
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
-    print(hexColor);
+    // print(hexColor);
     hexColor = hexColor.toUpperCase().replaceAll("#", "");
     if (hexColor.length == 7 || hexColor.length == 6) {
       hexColor = "FF" + hexColor;

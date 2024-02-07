@@ -75,10 +75,8 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
           ),
           const SizedBox(height: 30),
           CustomTextField(
-            hint: 'Поиск документов...',
+            hint: 'Поиск категории...',
             isPhone: false,
-            // padding: 0,
-            // expand: false,
             textEditingController: searchController,
           ),
           const SizedBox(height: 30),
@@ -92,7 +90,7 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 49.w),
                       child: Text(
-                        'Мы не нашли не одной категории по вашему запросу',
+                        'Мы не нашли ни одной категории по вашему запросу',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'Poopins',
@@ -114,7 +112,7 @@ class _MainCategoriesViewState extends State<MainCategoriesView> {
           else
             Flexible(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 22),
+                padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +106,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(left: 9.h, top: 16.h),
-                      child: CustomBackButton(),
+                      child: const CustomBackButton(),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -200,7 +199,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(right: 9.h, top: 16.h),
-                      child: CustomBackButton.fake(),
+                      child: const CustomBackButton.fake(),
                     ),
                   ],
                 ),
@@ -350,7 +349,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                       ),
                     ],
                   ),
-                SizedBox(height: 52),
+                const SizedBox(height: 52),
                 GestureDetector(
                   onTap: () async {
                     await deleteDialog(

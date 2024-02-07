@@ -104,7 +104,7 @@ class _SubCategoriesViewState extends State<SubCategoriesView> {
           ),
           const SizedBox(height: 30),
           CustomTextField(
-            hint: 'Поиск документов...',
+            hint: 'Поиск категории...',
             isPhone: false,
             // expand: false,
             textEditingController: searchController,
@@ -120,7 +120,7 @@ class _SubCategoriesViewState extends State<SubCategoriesView> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 49.w),
                       child: Text(
-                        'Мы не нашли не одной категории по вашему запросу',
+                        'Мы не нашли ни одной категории по вашему запросу',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'Poopins',
